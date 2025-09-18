@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Dashboard - Khadamni</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e8f0fe 100%);
+      color: #2d3748;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(28, 126, 214, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1c7ed6;
+      text-decoration: none;
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #1c7ed6;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .login-btn {
+      color: #1c7ed6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+      border-radius: 25px;
+    }
+
+    .login-btn:hover {
+      background: rgba(28, 126, 214, 0.1);
+    }
+
+    .register-btn {
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(28, 126, 214, 0.3);
+    }
+
+    /* Dashboard Header */
+    .dashboard-header {
+      background: linear-gradient(135deg, rgba(28, 126, 214, 0.1), rgba(28, 126, 214, 0.05));
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(28, 126, 214, 0.1);
+    }
+
+    .dashboard-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .dashboard-header h1 {
+      font-size: 2.5rem;
+      color: #1c7ed6;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .dashboard-header p {
+      color: #4a5568;
+      font-size: 1.2rem;
+    }
+
+    .header-left {
+      flex: 1;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Stats Cards */
+    .stats-section {
+      padding: 3rem 0 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(28, 126, 214, 0.1);
+      border: 1px solid rgba(28, 126, 214, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(28, 126, 214, 0.15);
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+    }
+
+    .stat-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1c7ed6;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: #718096;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* Projects Section */
+    .projects-section {
+      padding: 2rem 0 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      color: #2d3748;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(28, 126, 214, 0.1);
+    }
+
+    .filter-tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: #718096;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .filter-tab.active {
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      color: white;
+      box-shadow: 0 3px 10px rgba(28, 126, 214, 0.3);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(28, 126, 214, 0.08);
+      border: 1px solid rgba(28, 126, 214, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(28, 126, 214, 0.15);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      color: #2d3748;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      flex: 1;
+    }
+
+    .project-status {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status.open {
+      background: linear-gradient(135deg, #38a169, #2f855a);
+      color: white;
+    }
+
+    .status.inprogress {
+      background: linear-gradient(135deg, #f6ad55, #ed8936);
+      color: white;
+    }
+
+    .status.completed {
+      background: linear-gradient(135deg, #4299e1, #3182ce);
+      color: white;
+    }
+
+    .project-details {
+      margin-bottom: 2rem;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f7fafc;
+    }
+
+    .detail-label {
+      color: #718096;
+      font-weight: 500;
+    }
+
+    .detail-value {
+      color: #2d3748;
+      font-weight: 600;
+    }
+
+    .budget-value {
+      color: #1c7ed6;
+      font-size: 1.1rem;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(28, 126, 214, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(28, 126, 214, 0.1);
+      color: #1c7ed6;
+      border: 1px solid rgba(28, 126, 214, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(28, 126, 214, 0.2);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #718096;
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Footer */
+    .main-footer {
+      background: #2d3748;
+      color: white;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1c7ed6;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section p {
+      color: #a0aec0;
+      line-height: 1.6;
+    }
+
+    .footer-section h4 {
+      color: #1c7ed6;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: #a0aec0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #1c7ed6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #4a5568;
+      padding: 2rem 0;
+      text-align: center;
+      color: #a0aec0;
+    }
+
+    /* Animations */
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate {
+      animation: slideInUp 0.6s ease forwards;
+    }
+
+    .animate:nth-child(1) { animation-delay: 0.1s; }
+    .animate:nth-child(2) { animation-delay: 0.2s; }
+    .animate:nth-child(3) { animation-delay: 0.3s; }
+    .animate:nth-child(4) { animation-delay: 0.4s; }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .navbar .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-header .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .dashboard-header h1 {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .project-card {
+        padding: 1.5rem;
+      }
+
+      .project-actions {
+        flex-direction: column;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-tabs {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        padding: 1rem;
+      }
+
+      .dashboard-header {
+        padding: 2rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">Khadamni</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#freelancers">Freelancers</a></li>
+        <li><a href="#employers">Employers</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn">Login</a>
+        <a href="signup.html" class="register-btn">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Header -->
+  <section class="dashboard-header">
+    <div class="container">
+      <div class="header-left">
+        <h1>👋 Welcome back, Ahmed!</h1>
+        <p>Manage your projects, review proposals, and track your team's progress.</p>
+      </div>
+      <div class="header-actions">
+        <a href="post-project.html" class="register-btn">➕ Post New Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card animate">
+          <div class="stat-icon">📋</div>
+          <div class="stat-number">8</div>
+          <div class="stat-label">Active Projects</div>
+        </div>
+        <div class="stat-card animate">
+          <div class="stat-icon">👥</div>
+          <div class="stat-number">24</div>
+          <div class="stat-label">Total Proposals</div>
+        </div>
+        <div class="stat-card animate">
+          <div class="stat-icon">✅</div>
+          <div class="stat-number">12</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card animate">
+          <div class="stat-icon">💰</div>
+          <div class="stat-number">15,240</div>
+          <div class="stat-label">Total Spent (TND)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>📝 Your Projects</h2>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="filterProjects('all')">All</button>
+          <button class="filter-tab" onclick="filterProjects('open')">Open</button>
+          <button class="filter-tab" onclick="filterProjects('inprogress')">In Progress</button>
+          <button class="filter-tab" onclick="filterProjects('completed')">Completed</button>
+        </div>
+      </div>
+      
+      <div id="projectsGrid" class="projects-grid">
+        <!-- Project cards will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-logo">Khadamni</h3>
+          <p>Connecting talented freelancers with businesses across Tunisia and beyond. Build your next project with confidence.</p>
+        </div>
+        <div class="footer-section">
+          <h4>For Clients</h4>
+          <ul class="footer-links">
+            <li><a href="#how-it-works">How it Works</a></li>
+            <li><a href="#post-project">Post a Project</a></li>
+            <li><a href="#browse-freelancers">Browse Freelancers</a></li>
+            <li><a href="#client-support">Client Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>For Freelancers</h4>
+          <ul class="footer-links">
+            <li><a href="#become-freelancer">Become a Freelancer</a></li>
+            <li><a href="#find-work">Find Work</a></li>
+            <li><a href="#freelancer-tools">Freelancer Tools</a></li>
+            <li><a href="#success-stories">Success Stories</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Khadamni. All rights reserved. | Empowering Tunisia's Digital Economy</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Enhanced projects data with more details
+    const projects = [
+      {
+        id: 1,
+        title: "E-commerce Website Development",
+        budget: 2500,
+        status: "open",
+        proposals: 12,
+        posted: "2 days ago",
+        deadline: "March 15, 2025",
+        category: "Web Development",
+        description: "Looking for experienced developer to build modern e-commerce platform"
+      },
+      {
+        id: 2,
+        title: "Company Logo & Branding Design",
+        budget: 800,
+        status: "inprogress",
+        proposals: 8,
+        posted: "1 week ago",
+        deadline: "February 28, 2025",
+        category: "Graphic Design",
+        description: "Need complete brand identity including logo, colors, and style guide"
+      },
+      {
+        id: 3,
+        title: "Mobile App UI/UX Design",
+        budget: 1800,
+        status: "completed",
+        proposals: 15,
+        posted: "3 weeks ago",
+        deadline: "February 10, 2025",
+        category: "UI/UX Design",
+        description: "Design intuitive mobile app interface for fitness tracking application"
+      },
+      {
+        id: 4,
+        title: "Digital Marketing Campaign",
+        budget: 1200,
+        status: "open",
+        proposals: 6,
+        posted: "5 days ago",
+        deadline: "March 30, 2025",
+        category: "Marketing",
+        description: "Create comprehensive digital marketing strategy for product launch"
+      },
+      {
+        id: 5,
+        title: "Content Writing for Blog",
+        budget: 600,
+        status: "inprogress",
+        proposals: 9,
+        posted: "1 week ago",
+        deadline: "March 5, 2025",
+        category: "Writing",
+        description: "Need 10 high-quality blog posts about technology trends"
+      }
+    ];
+
+    let currentFilter = 'all';
+    const projectsGrid = document.getElementById('projectsGrid');
+
+    function renderProjects(projectsToRender = projects) {
+      if (projectsToRender.length === 0) {
+        projectsGrid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <h3>No projects found</h3>
+            <p>Try adjusting your filter or post a new project to get started.</p>
+          </div>
+        `;
+        return;
+      }
+
+      projectsGrid.innerHTML = projectsToRender.map(project => `
+        <div class="project-card animate" data-status="${project.status}">
+          <div class="project-header">
+            <div>
+              <h3 class="project-title">${project.title}</h3>
+              <div class="detail-label">${project.category} • Posted ${project.posted}</div>
+            </div>
+            <span class="project-status status ${project.status.replace(/\s+/g, '')}">${project.status.replace(/([A-Z])/g, ' $1').trim()}</span>
+          </div>
+          
+          <p style="color: #718096; margin-bottom: 1.5rem; line-height: 1.6;">${project.description}</p>
+          
+          <div class="project-details">
+            <div class="detail-row">
+              <span class="detail-label">💰 Budget</span>
+              <span class="detail-value budget-value">TND ${project.budget.toLocaleString()}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">📝 Proposals</span>
+              <span class="detail-value">${project.proposals} received</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">⏰ Deadline</span>
+              <span class="detail-value">${project.deadline}</span>
+            </div>
+          </div>
+          
+          <div class="project-actions">
+            <button onclick="viewProposals(${project.id})" class="btn btn-primary">
+              👁️ View Proposals
+            </button>
+            <button onclick="editProject(${project.id})" class="btn btn-secondary">
+              ✏️ Edit Project
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // Add animation delay to each card
+      const cards = projectsGrid.querySelectorAll('.project-card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    }
+
+    function filterProjects(status) {
+      currentFilter = status;
+      
+      // Update active tab
+      document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Filter projects
+      const filteredProjects = status === 'all' 
+        ? projects 
+        : projects.filter(p => p.status === status);
+      
+      renderProjects(filteredProjects);
+    }
+
+    function viewProposals(projectId) {
+      const project = projects.find(p => p.id === projectId);
+      // Simulate opening proposals modal/page
+      alert(`📋 Viewing ${project.proposals} proposals for: ${project.title}\n\n🔄 This would typically open a detailed proposals page with freelancer bids, profiles, and proposal details.`);
+      // In real app: window.location.href = `project-proposals.html?id=${projectId}`;
+    }
+
+    function editProject(projectId) {
+      const project = projects.find(p => p.id === projectId);
+      // Simulate opening edit form
+      alert(`✏️ Editing project: ${project.title}\n\n🔄 This would typically open an edit form with the current project details populated.`);
+      // In real app: window.location.href = `edit-project.html?id=${projectId}`;
+    }
+
+    // Update stats based on projects data
+    function updateStats() {
+      const activeProjects = projects.filter(p => p.status === 'open' || p.status === 'inprogress').length;
+      const totalProposals = projects.reduce((sum, p) => sum + p.proposals, 0);
+      const completedProjects = projects.filter(p => p.status === 'completed').length;
+      const totalSpent = projects.filter(p => p.status === 'completed').reduce((sum, p) => sum + p.budget, 0);
+
+      document.querySelector('.stat-card:nth-child(1) .stat-number').textContent = activeProjects;
+      document.querySelector('.stat-card:nth-child(2) .stat-number').textContent = totalProposals;
+      document.querySelector('.stat-card:nth-child(3) .stat-number').textContent = completedProjects;
+      document.querySelector('.stat-card:nth-child(4) .stat-number').textContent = totalSpent.toLocaleString();
+    }
+
+    // Initialize dashboard
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProjects();
+      updateStats();
+      
+      // Add loading animation
+      setTimeout(() => {
+        document.querySelectorAll('.animate').forEach((element, index) => {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        });
+      }, 100);
+    });
+
+    // Add real-time updates simulation
+    setInterval(() => {
+      // Randomly update proposal counts to simulate real-time activity
+      const randomProject = projects[Math.floor(Math.random() * projects.length)];
+      if (randomProject.status === 'open' && Math.random() > 0.8) {
+        randomProject.proposals += 1;
+        if (currentFilter === 'all' || currentFilter === randomProject.status) {
+          renderProjects(currentFilter === 'all' ? projects : projects.filter(p => p.status === currentFilter));
+        }
+        updateStats();
+      }
+    }, 10000); // Update every 10 seconds
+  </script>
+</body>
+</html>

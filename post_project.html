@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post a Project - Khadamni</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Wizard Form Steps */
+.form-step {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
+  display: none;
+}
+.form-step.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #1c7ed6, #1664c7);
+  color: white;
+  border: none;
+  padding: 1.2rem 2rem;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(28, 126, 214, 0.3);
+}
+
+/* Success Message */
+.success-message {
+  display: none;
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #38a169, #2f855a);
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* File upload label */
+.file-upload-label {
+  display: block;
+  text-align: center;
+  color: #718096;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+</style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">Khadamni</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#freelancers">Freelancers</a></li>
+        <li><a href="#employers">Employers</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn">Login</a>
+        <a href="signup.html" class="register-btn">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <section class="project-section">
+      <div class="project-form">
+        <h2>🚀 Post a New Project</h2>
+        <p>Step by step: fill in your project details</p>
+
+        <form id="postProjectForm">
+
+          <!-- Step 1: Title -->
+          <div class="form-step active" id="step-title">
+            <label for="title">Project Title <span class="required">*</span></label>
+            <input type="text" id="title" name="title" required placeholder="Build a modern website">
+            <button type="button" class="submit-btn">Submit Title →</button>
+          </div>
+
+          <!-- Step 2: Description -->
+          <div class="form-step" id="step-desc">
+            <label for="description">Project Description <span class="required">*</span></label>
+            <textarea id="description" name="description" required placeholder="Describe your project..."></textarea>
+            <button type="button" class="submit-btn">Submit Description →</button>
+          </div>
+
+          <!-- Step 3: Category -->
+          <div class="form-step" id="step-category">
+            <label for="category">Category <span class="required">*</span></label>
+            <select id="category" name="category" required>
+              <option value="">Select Category</option>
+              <option value="web-development">💻 Web Development</option>
+              <option value="mobile-apps">📱 Mobile Apps</option>
+              <option value="design">🎨 Design</option>
+              <option value="marketing">📈 Marketing</option>
+              <option value="writing">✍️ Writing</option>
+              <option value="video">🎬 Video Editing</option>
+              <option value="data">📊 Data Analysis</option>
+              <option value="translation">🌐 Translation</option>
+            </select>
+            <button type="button" class="submit-btn">Submit Category →</button>
+          </div>
+
+          <!-- Step 4: Budget -->
+          <div class="form-step" id="step-budget">
+            <label for="budget">Budget <span class="required">*</span></label>
+            <input type="number" id="budget" name="budget" placeholder="1000" min="50" required>
+            <button type="button" class="submit-btn">Submit Budget →</button>
+          </div>
+
+          <!-- Step 5: Deadline -->
+          <div class="form-step" id="step-deadline">
+            <label for="deadline">Project Deadline <span class="required">*</span></label>
+            <input type="date" id="deadline" name="deadline" required>
+            <button type="button" class="submit-btn">Submit Deadline →</button>
+          </div>
+
+          <!-- Step 6: Attach File -->
+          <div class="form-step" id="step-attachment">
+            <label for="attachments">Attach Files</label>
+            <input type="file" id="attachments" name="attachments" multiple>
+            <div class="file-upload-label">📎 Upload any relevant files (optional)</div>
+            <button type="submit" class="submit-btn">Finish & Post Project</button>
+          </div>
+
+        </form>
+
+        <div class="success-message" id="successMessage">
+          🎉 Success! Your project has been posted.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-logo">Khadamni</h3>
+          <p>Connecting talented freelancers with businesses across Tunisia and beyond.</p>
+        </div>
+        <div class="footer-section">
+          <h4>For Clients</h4>
+          <ul class="footer-links">
+            <li><a href="#how-it-works">How it Works</a></li>
+            <li><a href="#post-project">Post a Project</a></li>
+            <li><a href="#browse-freelancers">Browse Freelancers</a></li>
+            <li><a href="#client-support">Client Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>For Freelancers</h4>
+          <ul class="footer-links">
+            <li><a href="#become-freelancer">Become a Freelancer</a></li>
+            <li><a href="#find-work">Find Work</a></li>
+            <li><a href="#freelancer-tools">Freelancer Tools</a></li>
+            <li><a href="#success-stories">Success Stories</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Khadamni. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+const steps = [
+  document.getElementById('step-title'),
+  document.getElementById('step-desc'),
+  document.getElementById('step-category'),
+  document.getElementById('step-budget'),
+  document.getElementById('step-deadline'),
+  document.getElementById('step-attachment')
+];
+
+let currentStep = 0;
+
+function showStep(index) {
+  steps.forEach((step, i) => {
+    step.classList.toggle('active', i === index);
+  });
+}
+
+// Min date for deadline
+document.getElementById('deadline').min = new Date().toISOString().split('T')[0];
+
+// Handle step buttons
+steps.forEach((step, i) => {
+  const btn = step.querySelector('.submit-btn');
+  if (btn && i < steps.length - 1) {
+    btn.addEventListener('click', () => {
+      const input = step.querySelector('[required]');
+      if (!input.value.trim()) {
+        alert('Please fill in the required field!');
+        return;
+      }
+      currentStep++;
+      showStep(currentStep);
+    });
+  }
+});
+
+// Final submit
+document.getElementById('postProjectForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const allRequired = document.querySelectorAll('[required]');
+  for (let input of allRequired) {
+    if (!input.value.trim()) {
+      alert('Please fill in all required fields!');
+      return;
+    }
+  }
+  document.getElementById('successMessage').style.display = 'block';
+  document.getElementById('postProjectForm').reset();
+  currentStep = 0;
+  showStep(currentStep);
+});
+
+// File upload label
+const fileInput = document.getElementById('attachments');
+const fileLabel = document.querySelector('.file-upload-label');
+fileInput.addEventListener('change', function() {
+  const files = this.files;
+  if (files.length > 0) {
+    if (files.length === 1) fileLabel.textContent = `📎 Selected: ${files[0].name}`;
+    else fileLabel.textContent = `📎 Selected: ${files.length} files`;
+  } else {
+    fileLabel.textContent = '📎 Upload any relevant files (optional)';
+  }
+});
+</script>
+</body>
+</html>

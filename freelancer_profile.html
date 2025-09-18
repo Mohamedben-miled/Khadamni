@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed B. - Freelancer Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar from index -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="Khadamni homepage">Khadamni</a>
+
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="index.html#home" role="menuitem">Home</a></li>
+                <li role="none"><a href="index.html#freelancers" role="menuitem">Freelancers</a></li>
+                <li role="none"><a href="index.html#employers" role="menuitem">Employers</a></li>
+                <li role="none"><a href="index.html#services" role="menuitem">Services</a></li>
+                <li role="none"><a href="index.html#contact" role="menuitem">Contact</a></li>
+            </ul>
+
+            <div class="nav-buttons">
+                <a href="login.html" class="login-btn"><span>Login</span></a>
+                <a href="signup.html" class="register-btn"><span>Get Started</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Your existing header -->
+    <header class="header">
+        <button class="back-btn" onclick="goHome()">← Back Home</button>
+    </header>
+
+    <!-- Main freelancer profile page -->
+    <main class="profile-page">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Mohamed B. Avatar" class="avatar">
+            </div>
+            <h1>Mohamed B.</h1>
+            <p class="status online">Online</p>
+            <p class="location">📍 Aryanah, Tunisia</p>
+            <p class="hourly-rate">💰 $25/hr</p>
+
+            <div class="skills">
+                <h3>💼 Skills</h3>
+                <div class="skill-tags">
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>JavaScript</span>
+                    <span>React</span>
+                    <span>Node.js</span>
+                    <span>UI/UX</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <section class="main-content">
+            <div class="card about animate">
+                <h2>👋 About Me</h2>
+                <p>Passionate Front-End Developer with 3+ years of experience creating responsive, accessible, and user-friendly interfaces. I specialize in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, and UI/UX design principles. My expertise spans from marketplace platforms to SaaS applications, always focusing on delivering exceptional user experiences and clean, maintainable code.</p>
+            </div>
+
+            <div class="card portfolio animate">
+                <h2>🚀 Featured Projects</h2>
+                <div class="portfolio-items">
+                    <div class="portfolio-item">
+                        <h3>🏢 TheBarn Coworking Space</h3>
+                        <p>Responsive marketing website with booking system, optimized for performance and user engagement.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <h3>⚡ Ironbyte Website Development</h3>
+                        <p>Modern corporate website with interactive dashboards and client-facing interfaces.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card work-history animate">
+                <h2>💼 Work Experience</h2>
+                <div class="work-item">
+                    <h3>Front-End Developer | IronByte</h3>
+                    <span>Feb 2024 – Present</span>
+                    <p>Developed responsive landing pages, interactive dashboards, and client-facing interfaces with a strong focus on user experience, accessibility, and modern design patterns. Collaborated with cross-functional teams to deliver high-quality web solutions.</p>
+                </div>
+                <div class="work-item">
+                    <h3>Front-End Developer | TheBarn Coworking Space</h3>
+                    <span>May 2025 – June 2025</span>
+                    <p>Designed and launched a comprehensive responsive marketing website featuring booking forms, service pages, and member portals. Optimized for speed, SEO, and mobile-first user experience with modern web technologies.</p>
+                </div>
+            </div>
+
+            <div class="card certifications animate">
+                <h2>🎓 Education & Certifications</h2>
+                <ul>
+                    <li>Engineer's Degree - ESPRIT (École Supérieure Privée d'Ingénierie et de Technologies)</li>
+                    <li>GitHub Contributor & Open Source Developer - Since 2025</li>
+                    <li>Modern JavaScript & React Development Specialist</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer from index -->
+    <footer class="main-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">Khadamni</h3>
+                    <p>Connecting talented freelancers with businesses across Tunisia and beyond.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook" class="social-link">FB</a>
+                        <a href="#" aria-label="Twitter" class="social-link">TW</a>
+                        <a href="#" aria-label="LinkedIn" class="social-link">LI</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>For Clients</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#how-it-works">How it Works</a></li>
+                        <li><a href="index.html#post-project">Post a Project</a></li>
+                        <li><a href="index.html#browse-freelancers">Browse Freelancers</a></li>
+                        <li><a href="index.html#enterprise">Enterprise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Freelancers</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#become-freelancer">Become a Freelancer</a></li>
+                        <li><a href="index.html#find-work">Find Work</a></li>
+                        <li><a href="index.html#freelancer-resources">Resources</a></li>
+                        <li><a href="index.html#success-stories">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#help-center">Help Center</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="index.html#trust-safety">Trust & Safety</a></li>
+                        <li><a href="index.html#terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Khadamni. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="index.html#privacy">Privacy Policy</a>
+                    <a href="index.html#terms">Terms of Service</a>
+                    <a href="index.html#cookies">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function goHome() {
+            window.location.href = "index.html";
+        }
+
+        // Enhanced scroll animation
+        const animateElements = document.querySelectorAll('.animate');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        animateElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Hover effects for interactive elements
+        document.querySelectorAll('.portfolio-item, .work-item, .certifications li').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

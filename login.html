@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Khadamni</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="signup-page">
+    <a href="index.html" class="back-home-bubble">← Back to Home</a>
+
+  <main class="signup-page">
+    <section class="signup-form-section">
+      <div class="container">
+        <h1>Welcome Back</h1>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn-primary">Login</button>
+          </div>
+        </form>
+
+        <p class="login-link">Don't have an account? <a href="signup.html">Sign up here</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Form handling with animations
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const button = this.querySelector('.btn-primary');
+      const container = document.querySelector('.signup-page .container');
+
+      button.classList.add('loading');
+      button.textContent = 'Logging in...';
+
+      setTimeout(() => {
+        button.classList.remove('loading');
+        button.textContent = 'Logged In!';
+        container.classList.add('success-animation');
+
+        setTimeout(() => {
+          alert(`Logged in successfully!`);
+          button.textContent = 'Login';
+          container.classList.remove('success-animation');
+        }, 1000);
+      }, 1500);
+    });
+
+    const inputs = document.querySelectorAll('.signup-page input, .signup-page select');
+
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.checkValidity()) {
+          this.classList.remove('error');
+          this.classList.add('valid');
+          setTimeout(() => this.classList.remove('valid'), 300);
+        } else {
+          this.classList.remove('valid');
+          this.classList.add('error');
+          setTimeout(() => this.classList.remove('error'), 500);
+        }
+      });
+
+      input.addEventListener('input', function() {
+        this.classList.remove('error', 'valid');
+      });
+    });
+
+    inputs.forEach(input => {
+      const label = document.querySelector(`label[for="${input.id}"]`);
+      input.addEventListener('focus', () => { if(label) label.style.color = '#667eea'; });
+      input.addEventListener('blur', () => { if(label) label.style.color = '#555'; });
+    });
+
+    // Floating bubbles inside login form
+    const formContainer = document.querySelector('.signup-page .container');
+    const bubbleCount = 20;
+    for (let i = 0; i < bubbleCount; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 15 + 10;
+      bubble.style.width = bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.top = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${Math.random() * 5 + 5}s`;
+      bubble.style.animationDelay = `${Math.random() * 5}s`;
+      formContainer.appendChild(bubble);
+    }
+    const bubble = document.querySelector('.back-home-bubble');
+const container = document.querySelector('.signup-form-section .container');
+
+let x = Math.random() * (container.clientWidth - bubble.offsetWidth);
+let y = Math.random() * (container.clientHeight - bubble.offsetHeight);
+let dx = (Math.random() - 0.5) * 2; // horizontal speed
+let dy = (Math.random() - 0.5) * 2; // vertical speed
+
+function moveBubble() {
+  x += dx;
+  y += dy;
+
+  // Bounce off edges
+  if (x <= 0 || x + bubble.offsetWidth >= container.clientWidth) dx *= -1;
+  if (y <= 0 || y + bubble.offsetHeight >= container.clientHeight) dy *= -1;
+
+  bubble.style.left = x + 'px';
+  bubble.style.top = y + 'px';
+
+  requestAnimationFrame(moveBubble);
+}
+
+// Initialize
+moveBubble();
+
+  </script>
+</body>
+</html>
