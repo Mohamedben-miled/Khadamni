@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Jobs - Khadamni</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e8f0fe 100%);
+      color: #2d3748;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(28, 126, 214, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1c7ed6;
+      text-decoration: none;
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #1c7ed6;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .login-btn {
+      color: #1c7ed6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+      border-radius: 25px;
+    }
+
+    .login-btn:hover {
+      background: rgba(28, 126, 214, 0.1);
+    }
+
+    .register-btn {
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(28, 126, 214, 0.3);
+    }
+
+    /* Dashboard Header */
+    .dashboard-header {
+      background: linear-gradient(135deg, rgba(28, 126, 214, 0.1), rgba(28, 126, 214, 0.05));
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(28, 126, 214, 0.1);
+    }
+
+    .dashboard-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .dashboard-header h1 {
+      font-size: 2.5rem;
+      color: #1c7ed6;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .dashboard-header p {
+      color: #4a5568;
+      font-size: 1.2rem;
+    }
+
+    .header-left {
+      flex: 1;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-input {
+      background: white;
+      border: 2px solid rgba(28, 126, 214, 0.1);
+      border-radius: 25px;
+      padding: 0.75rem 1.5rem;
+      width: 300px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #1c7ed6;
+      box-shadow: 0 5px 15px rgba(28, 126, 214, 0.2);
+    }
+
+    /* Filters Section */
+    .filters-section {
+      padding: 2rem 0;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .filters-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(28, 126, 214, 0.05);
+      padding: 0.5rem;
+      border-radius: 20px;
+      border: 1px solid rgba(28, 126, 214, 0.1);
+    }
+
+    .filter-tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: #718096;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+    }
+
+    .filter-tab.active {
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      color: white;
+      box-shadow: 0 5px 15px rgba(28, 126, 214, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .filter-info {
+      color: #718096;
+      font-size: 0.9rem;
+    }
+
+    /* Jobs Section */
+    .jobs-section {
+      padding: 3rem 0 4rem;
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 2rem;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 12px 35px rgba(28, 126, 214, 0.08);
+      border: 1px solid rgba(28, 126, 214, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .job-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(28, 126, 214, 0.15);
+    }
+
+    .job-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .job-title {
+      font-size: 1.4rem;
+      color: #2d3748;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    .job-status {
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .status.open {
+      background: linear-gradient(135deg, #38a169, #2f855a);
+      color: white;
+    }
+
+    .status.urgent {
+      background: linear-gradient(135deg, #e53e3e, #c53030);
+      color: white;
+      animation: pulse 2s infinite;
+    }
+
+    .status.remote {
+      background: linear-gradient(135deg, #805ad5, #6b46c1);
+      color: white;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .job-meta {
+      color: #718096;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .job-description {
+      color: #4a5568;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .job-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: rgba(28, 126, 214, 0.02);
+      padding: 1.5rem;
+      border-radius: 15px;
+      border: 1px solid rgba(28, 126, 214, 0.08);
+    }
+
+    .detail-item {
+      text-align: center;
+    }
+
+    .detail-label {
+      color: #718096;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-value {
+      color: #2d3748;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .budget-value {
+      color: #1c7ed6;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .job-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .skill-tag {
+      background: rgba(28, 126, 214, 0.1);
+      color: #1c7ed6;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .job-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 1rem 1.5rem;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      text-align: center;
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1c7ed6, #1664c7);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(28, 126, 214, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(28, 126, 214, 0.1);
+      color: #1c7ed6;
+      border: 1px solid rgba(28, 126, 214, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(28, 126, 214, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: slideInUp 0.4s ease;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      padding: 2rem 2.5rem 1rem;
+      border-bottom: 1px solid rgba(28, 126, 214, 0.1);
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 1;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #718096;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: #e53e3e;
+    }
+
+    .modal-content {
+      padding: 2rem 2.5rem;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .modal-employer {
+      color: #1c7ed6;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: #718096;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .modal-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #4a5568;
+      margin-bottom: 2rem;
+    }
+
+    .modal-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      background: rgba(28, 126, 214, 0.02);
+      padding: 2rem;
+      border-radius: 20px;
+    }
+
+    .modal-section {
+      margin-bottom: 2rem;
+    }
+
+    .modal-section h3 {
+      color: #2d3748;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .requirements-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .requirements-list li {
+      padding: 0.5rem 0;
+      color: #4a5568;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .requirements-list li::before {
+      content: "✓";
+      color: #38a169;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .modal-actions {
+      padding: 2rem 2.5rem;
+      border-top: 1px solid rgba(28, 126, 214, 0.1);
+      display: flex;
+      gap: 1rem;
+      background: rgba(28, 126, 214, 0.02);
+    }
+
+    /* Application Modal */
+    .application-form {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .form-input {
+      border: 2px solid rgba(28, 126, 214, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #1c7ed6;
+      box-shadow: 0 5px 15px rgba(28, 126, 214, 0.2);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #718096;
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    /* Footer */
+    .main-footer {
+      background: #2d3748;
+      color: white;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1c7ed6;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section p {
+      color: #a0aec0;
+      line-height: 1.6;
+    }
+
+    .footer-section h4 {
+      color: #1c7ed6;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: #a0aec0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #1c7ed6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #4a5568;
+      padding: 2rem 0;
+      text-align: center;
+      color: #a0aec0;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .animate {
+      animation: slideInUp 0.6s ease forwards;
+    }
+
+    .animate:nth-child(1) { animation-delay: 0.1s; }
+    .animate:nth-child(2) { animation-delay: 0.2s; }
+    .animate:nth-child(3) { animation-delay: 0.3s; }
+    .animate:nth-child(4) { animation-delay: 0.4s; }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .jobs-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .navbar .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-header .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .dashboard-header h1 {
+        font-size: 2rem;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-tabs {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .jobs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .job-card {
+        padding: 2rem;
+      }
+
+      .job-actions {
+        flex-direction: column;
+      }
+
+      .modal {
+        width: 95%;
+        margin: 1rem;
+      }
+
+      .modal-header,
+      .modal-content,
+      .modal-actions {
+        padding: 1.5rem;
+      }
+
+      .modal-details {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .job-card {
+        padding: 1.5rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">Khadamni</a>
+      <ul class="nav-links">
+        <li><a href="freelancer-dashboard.html">Dashboard</a></li>
+        <li><a href="#jobs">Jobs</a></li>
+        <li><a href="#messages">Messages</a></li>
+        <li><a href="#profile">Profile</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <a href="logout.html" class="login-btn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="dashboard-header">
+    <div class="container">
+      <div class="header-left">
+        <h1>🧑‍💻 Browse Jobs</h1>
+        <p>Discover exciting opportunities, submit compelling proposals, and grow your freelancing career.</p>
+      </div>
+      <div class="header-actions">
+        <input type="text" id="jobSearch" placeholder="🔍 Search jobs, skills, or companies..." class="search-input">
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-container">
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="filterJobs('all')">All Jobs</button>
+          <button class="filter-tab" onclick="filterJobs('open')">Open</button>
+          <button class="filter-tab" onclick="filterJobs('urgent')">Urgent</button>
+          <button class="filter-tab" onclick="filterJobs('remote')">Remote</button>
+        </div>
+        <div class="filter-info" id="filterInfo">
+          Showing all available jobs
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jobs Grid -->
+  <section class="jobs-section">
+    <div class="container">
+      <div id="jobsGrid" class="jobs-grid">
+        <!-- Job cards will be rendered here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Job Detail Modal -->
+  <div class="modal-overlay" id="jobModal">
+    <div class="modal">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-content" id="modalContent">
+        <!-- Modal content will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Modal -->
+  <div class="modal-overlay" id="applicationModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Submit Your Proposal</h2>
+        <button class="modal-close" onclick="closeApplicationModal()">&times;</button>
+      </div>
+      <div class="modal-content">
+        <form class="application-form" id="applicationForm">
+          <div class="form-group">
+            <label class="form-label">Cover Letter *</label>
+            <textarea class="form-input form-textarea" placeholder="Explain why you're the perfect fit for this project..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Proposal Budget (TND) *</label>
+            <input type="number" class="form-input" placeholder="Enter your proposed budget" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estimated Delivery Time *</label>
+            <select class="form-input" required>
+              <option value="">Select delivery time</option>
+              <option value="1-3 days">1-3 days</option>
+              <option value="1 week">1 week</option>
+              <option value="2 weeks">2 weeks</option>
+              <option value="1 month">1 month</option>
+              <option value="2-3 months">2-3 months</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Relevant Portfolio Links (optional)</label>
+            <input type="url" class="form-input" placeholder="https://your-portfolio.com">
+          </div>
+        </form>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeApplicationModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" onclick="submitApplication()">Submit Proposal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-logo">Khadamni</h3>
+          <p>Connecting talented freelancers with businesses across Tunisia and beyond. Build your next project with confidence.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#profile">Profile</a></li>
+            <li><a href="#jobs">Jobs</a></li>
+            <li><a href="#messages">Messages</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Khadamni. All rights reserved. | Empowering Tunisia's Digital Economy</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const jobs = [
+      {
+        id: 1,
+        title: "E-commerce Website Development",
+        employer: "TechCorp Solutions",
+        budget: 2500,
+        status: "open",
+        category: "Web Development",
+        posted: "2 days ago",
+        deadline: "March 15, 2025",
+        description: "We're looking for an experienced full-stack developer to build a modern e-commerce platform from scratch. The project includes user authentication, product management, shopping cart, payment integration, and admin dashboard.",
+        requirements: [
+          "Proficiency in React.js and Node.js",
+          "Experience with payment gateways (Stripe, PayPal)",
+          "Database design skills (MongoDB or PostgreSQL)",
+          "Responsive design implementation",
+          "API development and integration"
+        ],
+        skills: ["React", "Node.js", "MongoDB", "Stripe", "CSS", "JavaScript"],
+        proposals: 12,
+        employerRating: 4.8,
+        projectType: "Fixed Price",
+        experienceLevel: "Intermediate",
+        duration: "2-3 months",
+        remote: true
+      },
+      {
+        id: 2,
+        title: "Modern Logo & Complete Brand Identity",
+        employer: "Brandify Creative Agency",
+        budget: 1200,
+        status: "urgent",
+        category: "Graphic Design",
+        posted: "1 day ago",
+        deadline: "February 28, 2025",
+        description: "We need a talented designer to create a complete brand identity for our tech startup. This includes logo design, color palette, typography, business cards, letterhead, and brand guidelines.",
+        requirements: [
+          "Strong portfolio in brand identity design",
+          "Proficiency in Adobe Creative Suite",
+          "Understanding of modern design trends",
+          "Experience with startup branding",
+          "Ability to create comprehensive brand guidelines"
+        ],
+        skills: ["Logo Design", "Adobe Illustrator", "Brand Identity", "Typography", "Color Theory"],
+        proposals: 18,
+        employerRating: 4.9,
+        projectType: "Fixed Price",
+        experienceLevel: "Expert",
+        duration: "2-3 weeks",
+        remote: true
+      },
+      {
+        id: 3,
+        title: "Mobile App UI/UX Design",
+        employer: "FitLife Health Solutions",
+        budget: 1800,
+        status: "remote",
+        category: "UI/UX Design",
+        posted: "3 days ago",
+        deadline: "March 20, 2025",
+        description: "Design an intuitive and engaging mobile app interface for our fitness tracking application. The app should motivate users to maintain healthy habits while providing comprehensive fitness analytics.",
+        requirements: [
+  "Experience in mobile app UI/UX design",
+  "Proficiency with Figma or Adobe XD",
+  "Understanding of iOS and Android design guidelines",
+  "Ability to create interactive prototypes",
+  "Strong portfolio of mobile app designs"
+],
+skills: ["Figma", "Adobe XD", "UI Design", "UX Research", "Prototyping"],
+proposals: 8,
+employerRating: 4.7,
+projectType: "Fixed Price",
+experienceLevel: "Intermediate",
+duration: "3-4 weeks",
+remote: true
+}]
+const jobsGrid = document.getElementById("jobsGrid");
+const jobModal = document.getElementById("jobModal");
+const modalContent = document.getElementById("modalContent");
+const applicationModal = document.getElementById("applicationModal");
+
+function renderJobs(jobList) {
+  jobsGrid.innerHTML = '';
+  jobList.forEach(job => {
+    const card = document.createElement('div');
+    card.className = 'job-card animate';
+    card.innerHTML = `
+      <div class="job-header">
+        <h2 class="job-title">${job.title}</h2>
+        <span class="job-status status ${job.status}">${job.status}</span>
+      </div>
+      <div class="job-meta">Posted: ${job.posted} | Deadline: ${job.deadline}</div>
+      <p class="job-description">${job.description.substring(0, 120)}...</p>
+      <div class="job-skills">
+        ${job.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+      </div>
+      <div class="job-actions">
+        <button class="btn btn-primary" onclick="openJobModal(${job.id})">View Details</button>
+        <button class="btn btn-secondary" onclick="openApplicationModal(${job.id})">Apply</button>
+      </div>
+    `;
+    jobsGrid.appendChild(card);
+  });
+}
+
+function openJobModal(jobId) {
+  const job = jobs.find(j => j.id === jobId);
+  modalContent.innerHTML = `
+    <h2 class="modal-title">${job.title}</h2>
+    <div class="modal-employer">${job.employer}</div>
+    <div class="modal-meta">
+      <span>Budget: ${job.budget} TND</span>
+      <span>Proposals: ${job.proposals}</span>
+      <span>Rating: ${job.employerRating}</span>
+    </div>
+    <div class="modal-description">${job.description}</div>
+    <div class="modal-details">
+      ${job.requirements.map(req => `<div class="detail-item"><div class="detail-label">Requirement</div><div class="detail-value">${req}</div></div>`).join('')}
+    </div>
+  `;
+  jobModal.classList.add('active');
+}
+
+function closeModal() {
+  jobModal.classList.remove('active');
+}
+
+function openApplicationModal(jobId) {
+  applicationModal.classList.add('active');
+}
+
+function closeApplicationModal() {
+  applicationModal.classList.remove('active');
+}
+
+function submitApplication() {
+  alert('Proposal submitted successfully!');
+  closeApplicationModal();
+}
+
+// Filtering
+function filterJobs(status) {
+  document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+  document.querySelector(`.filter-tab[onclick="filterJobs('${status}')"]`).classList.add('active');
+
+  const filteredJobs = status === 'all' ? jobs : jobs.filter(job => job.status === status);
+  renderJobs(filteredJobs);
+  document.getElementById('filterInfo').textContent = `Showing ${filteredJobs.length} ${status === 'all' ? 'jobs' : status + ' jobs'}`;
+}
+
+// Search
+document.getElementById('jobSearch').addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase();
+  const filteredJobs = jobs.filter(job =>
+    job.title.toLowerCase().includes(term) ||
+    job.skills.some(skill => skill.toLowerCase().includes(term)) ||
+    job.employer.toLowerCase().includes(term)
+  );
+  renderJobs(filteredJobs);
+  document.getElementById('filterInfo').textContent = `Showing ${filteredJobs.length} jobs matching "${term}"`;
+});
+
+// Initial render
+renderJobs(jobs);
+</script>
+</html>
