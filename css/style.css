@@ -2525,3 +2525,187 @@ select {
   background-size: 1rem;
   padding-right: 3rem;
 }
+/* === Freelancer Dashboard Styles === */
+.freelancer-dashboard {
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+/* Header Section */
+.freelancer-dashboard .dashboard-header {
+  background: linear-gradient(135deg, rgba(28, 126, 214, 0.1), rgba(28, 126, 214, 0.05));
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(28, 126, 214, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.freelancer-dashboard .dashboard-header h1 {
+  font-size: 2.5rem;
+  color: #1c7ed6;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #1c7ed6, #1664c7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.freelancer-dashboard .dashboard-header p {
+  color: #4a5568;
+  font-size: 1.2rem;
+}
+
+/* Stats Cards */
+.freelancer-dashboard .stats-section {
+  padding: 3rem 0 2rem;
+}
+
+.freelancer-dashboard .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.freelancer-dashboard .stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(28, 126, 214, 0.1);
+  border: 1px solid rgba(28, 126, 214, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.freelancer-dashboard .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(28, 126, 214, 0.15);
+}
+
+.freelancer-dashboard .stat-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.freelancer-dashboard .stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1c7ed6;
+  margin-bottom: 0.5rem;
+}
+
+.freelancer-dashboard .stat-label {
+  color: #718096;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* Cards for Projects, Jobs, Earnings */
+.freelancer-dashboard .dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.freelancer-dashboard .dashboard-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(28, 126, 214, 0.08);
+  border: 1px solid rgba(28, 126, 214, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.freelancer-dashboard .dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(28, 126, 214, 0.15);
+}
+
+.freelancer-dashboard .dashboard-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.freelancer-dashboard .dashboard-card p {
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+/* Buttons */
+.freelancer-dashboard .btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.freelancer-dashboard .btn-primary {
+  background: linear-gradient(135deg, #1c7ed6, #1664c7);
+  color: white;
+}
+
+.freelancer-dashboard .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(28, 126, 214, 0.3);
+}
+
+.freelancer-dashboard .btn-secondary {
+  background: rgba(28, 126, 214, 0.1);
+  color: #1c7ed6;
+  border: 1px solid rgba(28, 126, 214, 0.2);
+}
+
+.freelancer-dashboard .btn-secondary:hover {
+  background: rgba(28, 126, 214, 0.2);
+}
+
+/* Messages Section */
+.freelancer-dashboard .messages-section {
+  margin-top: 3rem;
+}
+
+.freelancer-dashboard .message-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(28,126,214,0.05);
+  border: 1px solid rgba(28,126,214,0.08);
+}
+
+.freelancer-dashboard .message-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Profile Section */
+.freelancer-dashboard .profile-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(28,126,214,0.08);
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .freelancer-dashboard .stats-grid,
+  .freelancer-dashboard .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+}
